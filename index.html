@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxe Lashes | Book Your Appointment</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <!-- Floating Contact Icons -->
+  <div class="contact-float">
+    <a href="https://wa.me/2340000000000" target="_blank" rel="noopener" class="float-btn whatsapp" title="Chat on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://instagram.com/yourlashbrand" target="_blank" rel="noopener" class="float-btn instagram" title="Follow on Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">✦</span>
+        <span>Luxe Lashes</span>
+      </a>
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#booking">Book Now</a>
+        <a href="#about">About</a>
+        <a href="admin/index.html" class="admin-link" title="Admin Panel"><i class="fas fa-cog"></i></a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1>Beautiful Lashes,<br />Every Time</h1>
+      <p>Premium lash extensions tailored just for you. Soft pinks, creamy tones &amp; flawless results.</p>
+      <a href="#booking" class="btn btn-primary">Book Appointment</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Lash Sets</h2>
+        <p>Choose your perfect look — all sets currently priced at ₦0</p>
+      </div>
+      <div class="services-grid" id="services-grid">
+        <!-- Populated by JS from localStorage or defaults -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="booking" class="booking">
+    <div class="container">
+      <div class="section-header">
+        <h2>Book Your Appointment</h2>
+        <p>Available Monday – Friday. Select a service, day &amp; time, then pay securely.</p>
+      </div>
+      <form id="booking-form" class="booking-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="client-name">Full Name</label>
+            <input type="text" id="client-name" name="name" required placeholder="Your full name" />
+          </div>
+          <div class="form-group">
+            <label for="client-phone">Phone Number</label>
+            <input type="tel" id="client-phone" name="phone" required placeholder="e.g. 08012345678" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="client-email">Email (optional)</label>
+            <input type="email" id="client-email" name="email" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="service-select">Lash Set</label>
+            <select id="service-select" name="service" required>
+              <option value="">Select a set…</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="booking-day">Preferred Day</label>
+            <select id="booking-day" name="day" required>
+              <option value="">Select day…</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="booking-time">Preferred Time</label>
+            <select id="booking-time" name="time" required>
+              <option value="">Select time…</option>
+              <option value="09:00">09:00 AM</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="11:00">11:00 AM</option>
+              <option value="12:00">12:00 PM</option>
+              <option value="13:00">01:00 PM</option>
+              <option value="14:00">02:00 PM</option>
+              <option value="15:00">03:00 PM</option>
+              <option value="16:00">04:00 PM</option>
+              <option value="17:00">05:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Special Requests (optional)</label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Any allergies, preferences, or notes…"></textarea>
+        </div>
+
+        <div class="price-summary" id="price-summary">
+          <span>Total:</span>
+          <strong id="total-price">₦0</strong>
+        </div>
+
+        <div class="payment-section">
+          <h3>Payment</h3>
+          <p class="payment-note">Secure payment simulation. In production connect to Paystack / Flutterwave.</p>
+          <div class="payment-methods">
+            <label class="pay-option">
+              <input type="radio" name="payment" value="card" checked />
+              <span><i class="fas fa-credit-card"></i> Card</span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="payment" value="transfer" />
+              <span><i class="fas fa-university"></i> Bank Transfer</span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="payment" value="cash" />
+              <span><i class="fas fa-money-bill-wave"></i> Pay on Arrival</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">
+          <i class="fas fa-calendar-check"></i> Confirm &amp; Pay
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="container about-grid">
+      <div class="about-text">
+        <h2>About Luxe Lashes</h2>
+        <p>We specialise in premium lash extensions using high-quality materials for a natural or dramatic look that lasts. Every set is applied with care in a clean, relaxing space.</p>
+        <p>Available Monday to Friday. Reach us anytime on WhatsApp or Instagram for questions, rescheduling or custom requests.</p>
+        <div class="about-contact">
+          <a href="https://wa.me/2340000000000" target="_blank" class="btn btn-outline"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="https://instagram.com/yourlashbrand" target="_blank" class="btn btn-outline"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+      <div class="about-card">
+        <h3>Opening Hours</h3>
+        <ul>
+          <li><span>Monday – Friday</span><span>9:00 AM – 5:00 PM</span></li>
+          <li><span>Saturday – Sunday</span><span>Closed</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div id="success-modal" class="modal hidden">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-icon">✓</div>
+      <h2>Booking Confirmed!</h2>
+      <p id="success-message">Thank you. Your appointment has been reserved.</p>
+      <p class="modal-note">You’ll receive a confirmation shortly. For any changes, message us on WhatsApp.</p>
+      <button class="btn btn-primary" onclick="closeModal()">Done</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Luxe Lashes. All rights reserved.</p>
+      <p class="footer-links">
+        <a href="https://wa.me/2340000000000" target="_blank">WhatsApp</a> ·
+        <a href="https://instagram.com/yourlashbrand" target="_blank">Instagram</a> ·
+        <a href="admin/index.html">Admin</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
