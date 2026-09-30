@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Luxe Lashes</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">✦</span>
+        <span>Luxe Lashes Admin</span>
+      </a>
+      <div>
+        <a href="../index.html" class="btn btn-outline btn-sm">← View Site</a>
+        <button id="logout-btn" class="btn btn-secondary btn-sm" style="display:none; margin-left:0.5rem;">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-panel">
+    <div class="container">
+      <!-- Login -->
+      <div id="login-section" class="login-box">
+        <h1>Admin Login</h1>
+        <div id="login-alert" class="alert alert-error" style="display:none;"></div>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" placeholder="Enter admin password" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Login</button>
+        </form>
+        <p style="text-align:center; margin-top:1rem; font-size:0.8rem; color:var(--text-muted);">
+          Default password: <code>luxe2024</code>
+        </p>
+      </div>
+
+      <!-- Dashboard (hidden until login) -->
+      <div id="dashboard" style="display:none;">
+        <div class="section-header" style="text-align:left; margin-bottom:1.5rem;">
+          <h2>Manage Services</h2>
+          <p>Edit names, prices, images or add new lash sets. Changes appear instantly on the live site.</p>
+        </div>
+
+        <div id="admin-alert" class="alert alert-success" style="display:none;"></div>
+
+        <div class="admin-card">
+          <h2>Current Lash Sets</h2>
+          <div id="services-list">
+            <!-- filled by JS -->
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h2>Add New Service</h2>
+          <form id="add-service-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="new-name">Name</label>
+                <input type="text" id="new-name" required placeholder="e.g. Hybrid Set" />
+              </div>
+              <div class="form-group">
+                <label for="new-price">Price (₦)</label>
+                <input type="number" id="new-price" min="0" step="100" value="0" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="new-desc">Short description (optional)</label>
+              <input type="text" id="new-desc" placeholder="Brief description" />
+            </div>
+            <div class="form-group">
+              <label for="new-image">Image</label>
+              <input type="file" id="new-image" accept="image/*" />
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.35rem;">Upload a photo of the lash set. Max ~2MB recommended.</p>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-plus"></i> Add Service
+            </button>
+          </form>
+        </div>
+
+        <div class="admin-card">
+          <h2>Contact Links</h2>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
+            Update WhatsApp number and Instagram username. These power the floating icons and footer links.
+          </p>
+          <form id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="wa-number">WhatsApp (with country code, no +)</label>
+                <input type="text" id="wa-number" placeholder="2348012345678" />
+              </div>
+              <div class="form-group">
+                <label for="ig-username">Instagram username</label>
+                <input type="text" id="ig-username" placeholder="yourlashbrand" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Contact Links</button>
+          </form>
+        </div>
+
+        <div class="admin-card">
+          <h2>Recent Bookings</h2>
+          <div id="bookings-list">
+            <p style="color:var(--text-muted);">No bookings yet.</p>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h2>Reset to Defaults</h2>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
+            Restore the original 7 lash sets and clear any custom changes.
+          </p>
+          <button id="reset-btn" class="btn btn-danger btn-sm">
+            <i class="fas fa-undo"></i> Reset Services
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-content" style="max-width:480px; text-align:left;">
+      <button class="modal-close" id="edit-close">&times;</button>
+      <h2 style="text-align:center; margin-bottom:1.25rem;">Edit Service</h2>
+      <form id="edit-form">
+        <input type="hidden" id="edit-id" />
+        <div class="form-group">
+          <label for="edit-name">Name</label>
+          <input type="text" id="edit-name" required />
+        </div>
+        <div class="form-group">
+          <label for="edit-price">Price (₦)</label>
+          <input type="number" id="edit-price" min="0" step="100" required />
+        </div>
+        <div class="form-group">
+          <label for="edit-desc">Description</label>
+          <input type="text" id="edit-desc" />
+        </div>
+        <div class="form-group">
+          <label for="edit-image">Replace Image (optional)</label>
+          <input type="file" id="edit-image" accept="image/*" />
+          <div id="edit-preview" style="margin-top:0.75rem;"></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
